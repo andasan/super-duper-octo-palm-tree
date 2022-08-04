@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="layouts :: head(title='Online Shop Burnout Electronics')">
+</head>
+<body>
+	<nav th:replace="layouts :: navbar"></nav>
+
+	<div class="container">
+		<form action="/orderput/save" method="POST" th:object="${order}">
+			<fieldset>
+				<legend>Order</legend>
+				<hr class="mb-4" />
+
+				<table class="table table-bordered table-striped">
+					<thead class="bg-info" >
+						<tr>
+						
+							<th>Product</th>
+							<th>Version</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="mb-3">
+									<select class="form-control" th:field="${order.product}">
+									<option th:each="p: ${Products}" th:value="${p}" th:text="${p}" ></option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<div class="mb-3">
+									<select class="form-control" th:field="${order.version}">
+									<option th:each="v: ${Version}" th:value="${v}" th:text="${v}" ></option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<input th:name="quantity" class="form-control" type="number" placeholder="Quantity" th:value="${order.quantity}">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+					<div class="mb-3">
+						<div class="d-grid gap-2 col-1 mx-auto">
+							<br/><br/>
+ 					 		<button type="submit" class="btn btn-primary">Buy now</button>	
+ 					 		<br/><br/>
+						</div>
+					</div>	
+			</fieldset>
+		</form>
+		
+						<a href="/orderput/check" class="btn btn-success">All orders</a>
+
+	</div>
+</body>
+</html>
